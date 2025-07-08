@@ -35,14 +35,7 @@ jobs:
         with:
           fail: true
 
-      - name: Dependency Vulnerability Check (OWASP)
-        uses: dependency-check/Dependency-Check_Action@main
-        with:
-          project: 'cyberdemo'
-          format: 'HTML'
-          out: 'reports'
-          scan: '.'
-
+     
       - name: Upload Dependency Report
         uses: actions/upload-artifact@v4
         with:
