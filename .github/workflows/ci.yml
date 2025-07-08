@@ -19,24 +19,20 @@ jobs:
           java-version: '21'
 
       - name: Build with Maven
-        run: mvn compile
+        run: mvn clean compile
 
-      - name: Run Tests
-        run: mvn test
+      - name: Run Tests and Coverage
+        run: mvn verify
 
-      - name: Generate JaCoCo Report
-        run: mvn jacoco:report
-
-      - name: Upload JaCoCo Report as artifact
+      - name: Upload JaCoCo Report
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
           path: target/site/jacoco/
 
-      - name: Run Gitleaks for secrets detection
+      - name: Run Gitleaks (secret detection)
         uses: gitleaks/gitleaks-action@v2
         with:
-          config-path: .gitleaks.toml  # facultatif
           fail: true
 
       - name: Dependency Vulnerability Check (OWASP)
